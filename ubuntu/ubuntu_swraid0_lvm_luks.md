@@ -1,10 +1,6 @@
 ## disk-encryption-hetzner
 
-This should be a clean step-by-step guide how to setup a hetzner root server from the server auctions at hetzners "serverbörse" to get a fully encrypted software raid1 with lvm on top.
-
-The goal of this guide is to have a server system that has encrypted drives and is remotely unlockable.
-
-This guide *could* work at any other provider with a rescue system.
+This is the guide found at https://github.com/TheReal1604/disk-encryption-hetzner/blob/master/ubuntu/ubuntu_swraid_lvm_luks.md with a few changes as I experienced a lot of issues (pvresize, pvchange and dropbear issues.)
 
 ### Hardware setup
 "Dedicated Root Server SB36"
@@ -150,26 +146,15 @@ After a few seconds, try to connect to your server with the below, the dropbear 
 
 ## Optional steps
 You can further secure dropbear by changing its port and disabling unnecessary features:
-- `vi /etc/dropbear-initramfs/config`
+- `nano /etc/dropbear-initramfs/config`
 - add the line `DROPBEAR_OPTIONS="-p 2222 -s -j -k -I 30"`
 - `update-initramfs -u`
 
 This makes dropbear to listen to port 2222 instead of 22, `-s` disables password logins, `-j -k` disables port forwarding, `-I 30` sets the idle timeout to 30 seconds.
 
-Additionally you can alter the authorized_keys file to show the cryptsetup password prompt directly instead of the busybox prompt (and disable further unnecessary SSH features):
-- `nano /etc/dropbear-initramfs/authorized_keys`
-- alter your public key like this: `no-port-forwarding,no-agent-forwarding,no-X11-forwarding,command="/bin/cryptroot-unlock" ssh-rsa ...`
-- `update-initramfs -u`
-
 Reboot you server and unlock your system using
 - `ssh -p 2222 -i .ssh/dropbear root@<yourserverip>`
 
-Now, the whole SSH session looks really neat (and your password is not shown while entering):
-```
-Please unlock disk cryptroot (/dev/md1):
-cryptsetup: cryptroot set up successfully
-Connection to <yourserverip> closed.
-```
 
 ## Sources:
 Special thanks to the people who wrote already this guides:
@@ -183,6 +168,4 @@ Special thanks to the people who wrote already this guides:
 - PRs are very welcome or open an issue if something not works for you as described
 
 ## Comments
-- Tested this guide on 25.10.2017 on my own hetzner system, its working pretty good :-)
-- tested again by a contributor on 03.03.2019 and 11.03.2019
 - tested on 28.02.2021
