@@ -185,3 +185,4 @@ Special thanks to the people who wrote already this guides:
 ## Comments
 - Tested this guide on 25.10.2017 on my own hetzner system, its working pretty good :-)
 - tested again by a contributor on 03.03.2019 and 11.03.2019
+- tested on 28.02.2021
