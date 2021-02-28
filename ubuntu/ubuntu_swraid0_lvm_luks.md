@@ -27,7 +27,7 @@ LV vg0 root / btrfs 3206G
 - you will note I deducted the /boot and swap allocation from the 3726 GiB above to make an allocation rather than use all. I find that saying all will cause problems when running pvresize and mkfs later. 
 
 - after you adjusted all parameters in the install config file, press F10 to install the ubuntu minimal system
--
+
 - reboot and ssh into your fresh installed ubuntu
 
 ### First steps on your fresh ubuntu installation
