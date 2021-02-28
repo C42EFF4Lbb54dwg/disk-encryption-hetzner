@@ -50,11 +50,11 @@ LV vg0 root / btrfs 3206G
 
 - `apt update && apt install busybox dropbear lvm2 vim cryptsetup cryptsetup-bin dropbear-initramfs`
 
--Edit your `.` and set `BUSYBOX=y`
+-Edit your `/etc/initramfs-tools/initramfs.conf` and set `BUSYBOX=y`
 
 - Create a new ssh key for unlocking your encrypted volumes when it is rebooting LOCALLY
 - `ssh-keygen -t rsa -b 4096 -f .ssh/dropbear`
-- note, I open the dropbear and dropbear.pub files and make note of them on my secure PC. Just incase.
+- note, I open the dropbear and dropbear.pub files and save copies of them on my secure PC. Just incase.
 - Create the needed folders for dropbear keys
 - `mkdir -p /etc/initramfs-tools/root/.ssh/`
 - `cat .ssh/dropbear.pub >> /etc/dropbear-initramfs/authorized_keys`
